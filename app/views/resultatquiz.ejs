@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+
+<h1 class ="Winner_winner_chicken_dinner">Félicitations !! Votre score est de <%= score %> points</h1>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="h1 display-4"><%= quiz.title %></h2>
+    <p class="lead"><%= quiz.description %></p>
+    <p class="font-weight-bold">par <%= quiz.author.fullname %></p>
+    <p class="lead"><%= quiz.questions.length %> questions</p>
+</div>
+
+<div class="row">
+    <% for (const tag of quiz.tags) { %>
+        <div class="col-3 p-4 text-center">
+
+            <a href="/tags/<%= tag.id %> " 
+                class="btn btn-block btn-lg tag tag--<%= tag.name.toLowerCase() %>" >
+                <%= tag.name %> 
+            </a>
+        </div>
+    <% } %> 
+
+</div>
+
+<div class="row">
+    <% let questionz= 0 %> 
+    <% for (const question of quiz.questions) { %>
+        
+        <div class="col-12">
+            <label class="badge level level--<%= question.level.name.toLowerCase() %>">
+                <%= question.level.name %> 
+            </label>
+            <h4>
+                <%= questionz +1 %>  <%= question.question %>
+            </h4>
+            <div>
+               
+                <ul >
+                <% for (const answer of question.answers) { %>
+                    <!-- IL faut bien comprendre que ici, hello[question.id] va aller récupérer la valeur de la clé qui correspond à question.id
+                        Dans notre cas, ça pourrait ressembler à ça : Si la question "171" est égale à la réponse 171" ET que 
+                        ce qu'à envoyé l'utilisateur dans la question 171 est bien "Blanc" et que la réponse est "Blanc", alors l'user a choisi la bonne Answer.
+                    -->
+                        <div  <% if( question.id === answer.id && hello[`${question.id}`] === answer.description ){ %>
+                        class="good_answer"
+
+                    <% } else if (hello[`${question.id}`]  === `${answer.description}`) { %>
+                                class = "user_selection"
+                        <% } %>s
+                     >
+
+                        <li 
+                        <% if (question.id === answer.id) { %>
+                            class ="answer" 
+                        <% } %> >  
+                            
+                            <%= answer.description %> </li>  
+                        </div>
+                
+                       <% } %> 
+                    </ul>
+            </div>
+
+            
+        </div>
+       
+        <% questionz++ %>
+   <% } %> 
+
+</div>
+
+
+<%- include('partials/footer') %>

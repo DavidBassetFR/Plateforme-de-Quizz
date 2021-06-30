@@ -1,0 +1,39 @@
+<%-include('partials/header')%>
+
+       
+<form action="" method="POST" class="form-signup">
+    <label for="name">Nom du thème:</label>
+
+    <input type ="text" id ="newTag" name="newTag"> 
+    <button  type="submit">Ajouter à ma liste de thème</button>
+</form>
+
+<form action="" method="POST" class="form-signup">
+    <label for="themeUpdate">Nom du thème:</label>
+    <select name="themeUpdate" id="pet-select">
+        <option value="null">--Please choose an option--</option>
+        <% for (const tag of tags){ %>
+        <option value="<%=tag.id%>"><%=tag.name%></option>
+        <% } %>
+    </select>
+    <input type ="text" id ="themeUpdate" name="themeUpdate"> 
+    <button  type="submit">Modifier un thème</button>
+</form>
+
+
+         <% if(typeof error !== "undefined"){ %>
+            <div class="card-deck row mb-3 text-center"> <%=error %> </div>
+         <%} %>
+          <div class="card-deck row mb-3 text-center">
+
+            <% for (const tag of tags){ %>
+                <div class="col-3 p-4 text-center">
+                    <a class="btn btn-block btn-lg tag tag--<%=tag.name.toLowerCase()%>" href="/tag/<%=tag.id%>">
+                        <%=tag.name%>
+                    </a>
+                </div>
+                <% } %>
+
+        </div>
+        
+<%-include('partials/footer')%>

@@ -1,0 +1,43 @@
+<%-include('partials/header')%>
+
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h2 class="h1 display-4"><%=quiz.title%></h2>
+            <p class="lead"><%=quiz.description%></p>
+            <p class="font-weight-bold">par <%=quiz.author.fullname%></p>
+            <%# quiz.questions est un tableau donc on peut récupérer la longueur de ce tableau afin d'afficher le nombre de questions%>%>
+            <p class="lead"><%=quiz.questions.length%> questions</p>
+        </div>
+
+        <div class="row">
+            <%# la propriété tags de l'objet quiz contien un tableau d'instances de Tag, je peux donc boucler sur ce tableau %>
+            <% for (const tag of quiz.tags) { %>
+                <div class="col-3 p-4 text-center">
+                    <a class="btn btn-block btn-lg tag tag--<%=tag.name.toLowerCase()%>" href="/tag/<%=tag.id%>">
+                        <%=tag.name%>
+                    </a>
+                </div>
+            <% } %>
+
+        </div>
+
+        <div class="row">
+
+            <%for (const question of quiz.questions){%>
+                <div class="col-12">
+                    <label class="badge level level--<%=question.level.name.toLowerCase()%>"><%=question.level.name%></label>
+                    <h4>
+                        <%=question.question%>
+                    </h4>
+                    <%# du côté de la vue je me retrouve avec une propriété "answers" qui contient une liste de "answer". Je vais donc pouvoir bouclé sur ce tableau afin de récupérer les informations de chaque réponse possible.%>
+                    <ol>
+                    <% for (const answer of question.answers){%>
+                        <li><%=answer.description%></li>
+                    <%}%>
+                    </ol>
+                </div>
+            <%}%>
+
+        </div>
+
+
+<%-include('partials/footer')%>

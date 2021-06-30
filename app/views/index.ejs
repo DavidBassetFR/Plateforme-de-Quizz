@@ -1,0 +1,37 @@
+<%-include('partials/header')%>
+
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h2 class="h1 display-4">Bienvenue sur O'Quiz</h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
+                duo
+                dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+                amet.
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+                et
+                ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem
+                ipsum
+                dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+                dolore
+                magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet
+                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
+
+
+        <div class="card-deck row mb-3 text-center">
+
+            <%# je vais avoir besoin du titre, de la description, de l'id et du nom complet de l'auteur du quiz%>
+            <%#
+            Un tableau JS (array) est itérable (Les informations ne sont pas organisé à travers des propriété, mais sont positionné dans le tableau dans un ordre précis)
+
+            Un objet JS est énumérable et no itérable. (les informations qui sont stocké/organisé dans cette objet n'ont pas d'ordre précis, les propriétés sont énumérable et mais pas récupérable dans un sens particulier)
+
+            %>
+            <% for (const quiz of quizList) {%>
+                <%-include('partials/quizBlock', { quiz })%>
+            <%}%>
+            
+        </div>
+<%-include('partials/footer')%>

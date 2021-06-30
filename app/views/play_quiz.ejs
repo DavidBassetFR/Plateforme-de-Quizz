@@ -1,0 +1,66 @@
+<%- include('./partials/header') %> 
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="h1 display-4"><%= quiz.title %></h2>
+    <p class="lead"><%= quiz.description %></p>
+    <p class="font-weight-bold">par <%= quiz.author.fullname %></p>
+    <p class="lead"><%= quiz.questions.length %> questions</p>
+</div>
+
+<% if (locals.user.role === 'admin'){ %>
+    <form action="" method="POST" class="form-signup">
+        <select name="TagID" id="TagID">
+            <% for (const tag of tags){ %>
+            <option value="<%=tag.id%>"><%=tag.name%></option>
+            <% } %>
+        </select>
+        <button  type="submit">Ajouter un thème à ce quizz</button>
+    </form>
+    <% } %>
+        
+<div class="row">
+    <% for (const tag of quiz.tags) { %>
+        <div class="col-3 p-4 text-center">
+            <a href="/tags/<%= tag.id %> " 
+                class="btn btn-block btn-lg tag tag--<%= tag.name.toLowerCase() %>" >
+                <%= tag.name %> 
+            </a>
+        </div>
+    <% } %> 
+
+</div>
+
+<div class="row">
+    <% let questionz= 1 %> <form action="" method="POST" class="form-signup">
+    <% for (const question of quiz.questions) { %>
+        
+        <div class="col-12">
+            <label class="badge level level--<%= question.level.name.toLowerCase() %>">
+                <%= question.level.name %> 
+            </label>
+            <h4>
+                <%= questionz %>  <%= question.question %>
+            </h4>
+            <div>
+               
+                
+                <% for (const answer of question.answers) { %>
+                    <div>
+                        <input type="radio" id="<%= question.id %>" name="<%=question.id %>" value="<%=  answer.description %>">
+                        <label for="<%= answer.description %>"> <%= answer.description %></label>
+                      </div>
+                <% } %>
+            </div>
+
+            
+        </div>
+       
+        <% questionz++ %>
+   <% } %> 
+   <button  type="submit">Regarder mon score</button>
+    </form>
+</div>
+
+
+
+<%- include('./partials/footer') %> 
